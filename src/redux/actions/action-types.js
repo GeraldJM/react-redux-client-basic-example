@@ -1,0 +1,5 @@
+const CHANGE_RECIPIENT = "CHANGE_RECIPIENT";
+
+export {
+    CHANGE_RECIPIENT
+}
