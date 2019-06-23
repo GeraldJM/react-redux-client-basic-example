@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { changeRecipient } from '../redux/actions';
+import { changeMessage, changeRecipient } from '../redux/actions';
 import { connect } from 'react-redux';
 
 class RecipientForm extends Component {
@@ -10,7 +10,8 @@ class RecipientForm extends Component {
     }
 
     state = {
-        input: ''
+        message: '',
+        recipient: '',
     }
 
     handleChange(e) {
@@ -21,20 +22,31 @@ class RecipientForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.changeRecipient(this.state.input);
+
+        let { message, recipient } = this.state;
+
+        message != '' ? this.props.changeMessage(message) : false;
+        recipient != '' ? this.props.changeRecipient(recipient) : false;
+
         this.setState({
-            input: ''
+            message: '',
+            recipient: ''
         });
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <input name="input" onChange={this.handleChange} value={this.state.input}></input>
-                <input type="submit" value="Change Recipient"></input>
+                <label>Message
+                    <input name="message" onChange={this.handleChange} value={this.state.message}></input>
+                </label>
+                <label>Recipient
+                    <input name="recipient" onChange={this.handleChange} value={this.state.recipient}></input>
+                </label>
+                <input type="submit" value="Update"></input>
             </form>
         )
     }
 }
 
-export default connect(null, { changeRecipient })(RecipientForm);
+export default connect(null, { changeRecipient, changeMessage })(RecipientForm);

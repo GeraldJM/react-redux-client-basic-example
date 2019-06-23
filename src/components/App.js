@@ -5,7 +5,7 @@ import RecipientForm from './RecipientForm';
 const App = (props) => {
     return (
         <div>
-            <h1>Hello {props.recipient}</h1>
+            <h1>{props.message}, {props.recipient}</h1>
             <RecipientForm />
         </div>
     );
@@ -13,6 +13,7 @@ const App = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        message: state.message,
         recipient: state.recipient
     }
 }
